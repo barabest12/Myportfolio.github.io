@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>เว็บแนะนำตัว</title>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็นฟอนต์ Sarabun */
+            background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f5ebe42c-26c1-4093-af7d-e434355ce4b9/de313k-6b511f1c-1b93-4d33-aa92-b7b8135f5503.jpg/v1/fill/w_896,h_632,q_75,strp/slam_dunk_by_xauychu_de313k-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjMyIiwicGF0aCI6IlwvZlwvZjVlYmU0MmMtMjZjMS00MDkzLWFmN2QtZTQzNDM1NWNlNGI5XC9kZTMxM2stNmI1MTFmMWMtMWI5My00ZDMzLWFhOTItYjdiODEzNWY1NTAzLmpwZyIsIndpZHRoIjoiPD04OTYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.WYup7cbxpkzaUmWV4d5hIT74JTZGEcY6GYdWFBdL55E') no-repeat center center fixed; /* ใช้ URL ของรูปภาพ */
+            background-size: cover; /* ขยายรูปภาพให้เต็มพื้นที่ */
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* เปลี่ยนจาก center เป็น flex-end เพื่อย้ายไปทางขวา */
+            gap: 30px;
+        }
+        .navbar li {
+            display: inline;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #ff6f91; /* สีชมพูสำหรับข้อความเมนู */
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #ffb6c1; /* สีชมพูอ่อนเมื่อ hover */
+        }
+
+        /* ส่วนของแต่ละแท็บ */
+        .tab-content {
+            display: none;
+            opacity: 0; /* ซ่อนเนื้อหา */
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* เพิ่ม transition */
+            transform: translateY(20px); /* เริ่มต้นเนื้อหาจะเลื่อนขึ้นจากด้านล่าง */
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1; /* แสดงเนื้อหาหลังจาก transition */
+            transform: translateY(0); /* เนื้อหาจะกลับมาที่ตำแหน่งเดิม */
+        }
+
+        .section {
+            max-width: 750px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #ff6f91; /* สีชมพูสำหรับหัวข้อ */
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ffb6c1; /* ขอบรูปโปรไฟล์สีชมพู */
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet"> <!-- เพิ่มฟอนต์ Sarabun -->
+</head>
+<body>
+
+    <!-- เมนู -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="javascript:void(0);" onclick="showTab('home')">หน้าแรก</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('about')">เกี่ยวกับ</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('work')">ผลงาน</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('contact')">ติดต่อ</a></li>
+        </ul>
+    </nav>
+
+    <!-- เนื้อหาต่าง ๆ -->
+    <section id="home" class="section tab-content active">
+        <img src="https://cdn-useast1.kapwing.com/static/templates/crying-cat-meme-template-regular-096fc808.webp" alt="โปรไฟล์" class="profile-pic">
+        <h1>ยินดีต้อนรับ</h1>
+        <p>สวัสดีครับ ผมชื่อบารเมศวร์ ฉายากุล หรือ เบส</p>
+        <p>ผมเป็นเด็กดาวอังคารงับ พึ่งเริ่มต้นการเรียนรู้ในการหัดเขียนภาษาHTML </p>
+    </section>
+
+    <section id="about" class="section tab-content">
+        <h1>เกี่ยวกับผม</h1>
+        <p>สวัสดีครับ ผมชื่อบารเมศวร์ ฉายากุล หรือ เบส อายุ 17 ปี กำลังศึกษาอยู่ ม.6</p>
+        <p>ผมสนใจในการออกแบบเว็บและการสร้างเกม โดยเฉพาะการเขียนโปรแกรมในภาษาต่าง ๆ เช่น HTML, CSS, JavaScript</p>
+    </section>
+
+    <section id="work" class="section tab-content">
+        <h1>ผลงานของผม</h1>
+        <p>ในระหว่างการเรียนผมได้ทำเว็บที่เกี่ยวกับการแนะนำตัวเอง และเกมเล็ก ๆ ที่เขียนด้วย JavaScript</p>
+    </section>
+
+    <section id="contact" class="section tab-content">
+        <h1>ติดต่อผม</h1>
+        <p>คุณสามารถติดต่อผมผ่านทางเบอร์โทรศัพท์ หรืออีเมล:</p>
+        <p><strong>เบอร์โทร:</strong> 0957280841</p>
+        <p><strong>อีเมล:</strong> bestt10369@gmail.com</p>
+    </section>
+
+    <script>
+        // ฟังก์ชันที่ใช้เปลี่ยนแท็บ
+        function showTab(tabName) {
+            // ซ่อนเนื้อหาทั้งหมด
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            // แสดงเนื้อหาที่เลือก
+            var selectedTab = document.getElementById(tabName);
+            selectedTab.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
