@@ -11,22 +11,37 @@
             margin: 0;
             padding: 0;
         }
+
         .navbar {
             background-color: #1D428A;
-            padding: 15px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
         .navbar ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
             gap: 30px;
         }
+
         .navbar a {
             text-decoration: none;
             color: #FDB927;
@@ -35,21 +50,25 @@
             border-radius: 20px;
             transition: background 0.3s ease;
         }
+
         .navbar a:hover {
             background-color: #FDB927;
             color: #1D428A;
         }
+
         .tab-content {
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             transform: translateY(20px);
         }
+
         .tab-content.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
+
         .section {
             max-width: 850px;
             margin: 50px auto;
@@ -58,69 +77,93 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
+
         h1 {
             font-size: 32px;
             color: #1D428A;
             margin-bottom: 20px;
         }
+
         p, li {
             font-size: 18px;
             color: #333;
             line-height: 1.6;
         }
-        .team-img {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <nav class="navbar">
-    <ul>
-        <li><a href="javascript:void(0);" onclick="showTab('home')">หน้าแรก</a></li>
-        <li><a href="javascript:void(0);" onclick="showTab('history')">ประวัติทีม</a></li>
-        <li><a href="javascript:void(0);" onclick="showTab('matches')">ผลงาน & แชมป์</a></li>
-        <li><a href="javascript:void(0);" onclick="showTab('players')">ผู้เล่นปัจจุบัน</a></li>
-    </ul>
+    <div class="nav-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/01/Golden_State_Warriors_logo.svg" alt="Warriors Logo" class="logo">
+        <ul>
+            <li><a href="javascript:void(0);" onclick="showTab('home')">หน้าแรก</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('history')">ประวัติทีม</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('matches')">ผลงาน & แชมป์</a></li>
+            <li><a href="javascript:void(0);" onclick="showTab('players')">สมาชิกทีม</a></li>
+        </ul>
+    </div>
 </nav>
 
 <section id="home" class="section tab-content active">
-    <img src="https://cdn.nba.com/manage/2022/05/GettyImages-1397611080-scaled.jpg" class="team-img" alt="Golden State Warriors">
     <h1>Golden State Warriors</h1>
-    <p>Golden State Warriors คือหนึ่งในทีมที่ประสบความสำเร็จมากที่สุดในประวัติศาสตร์ NBA พวกเขาเป็นที่รู้จักจากสไตล์การเล่นเร็วและแม่นยำ โดยมีผู้เล่นระดับตำนานอย่าง Stephen Curry, Klay Thompson และ Draymond Green</p>
+    <p>ทีมบาสเกตบอลระดับโลกที่มีสไตล์การเล่นโดดเด่น และฐานแฟนคลับที่แข็งแกร่งทั่วโลก</p>
+    <p>ด้านล่างคือการเปรียบเทียบคะแนนเฉลี่ยต่อเกมของผู้เล่นระดับตำนานของทีม:</p>
+    <canvas id="playerStatsChart" width="400" height="200"></canvas>
 </section>
 
 <section id="history" class="section tab-content">
-    <img src="https://cdn.nba.com/manage/2022/06/GettyImages-1404468413-scaled.jpg" class="team-img" alt="ประวัติทีม">
     <h1>ประวัติทีม</h1>
-    <p>ทีมก่อตั้งขึ้นในปี 1946 ในนาม Philadelphia Warriors ก่อนจะย้ายมาที่ซานฟรานซิสโกในปี 1962 และเปลี่ยนชื่อเป็น Golden State Warriors ในปี 1971</p>
-    <p>ทีมคว้าแชมป์ NBA ครั้งแรกในปี 1947 และได้รับความสำเร็จมากขึ้นในยุค 2010s ภายใต้การคุมทีมของโค้ช Steve Kerr โดยมี Stephen Curry เป็นหัวใจหลักของทีม</p>
+    <p>
+        ทีม <strong>Golden State Warriors</strong> ถือกำเนิดขึ้นในปี <strong>1946</strong> ภายใต้ชื่อเดิมว่า <em>Philadelphia Warriors</em> โดยเป็นหนึ่งในสมาชิกผู้ก่อตั้งของลีก BAA ซึ่งต่อมาได้กลายเป็น NBA ที่เรารู้จักในปัจจุบัน ทีมคว้าแชมป์ตั้งแต่ปีแรกของลีก (1947) นำโดยผู้เล่นอย่าง Joe Fulks ซึ่งถือเป็นหนึ่งในดาวเด่นยุคแรกของบาสเกตบอลอาชีพ
+    </p>
+    <p>
+        ในปี 1962 ทีมได้ย้ายถิ่นฐานไปยังรัฐแคลิฟอร์เนีย และใช้ชื่อว่า <em>San Francisco Warriors</em> เป็นเวลานานหลายปี ก่อนจะเปลี่ยนชื่ออีกครั้งในปี 1971 เป็น <strong>Golden State Warriors</strong> เพื่อสะท้อนถึงการเป็นทีมของทั้งรัฐ ไม่ใช่เพียงเมืองใดเมืองหนึ่ง
+    </p>
+    <p>
+        ยุค 1975 คือจุดเปลี่ยนสำคัญเมื่อทีมคว้าแชมป์ NBA ครั้งที่สาม นำโดยตำนานอย่าง <strong>Rick Barry</strong> และโค้ช <strong>Al Attles</strong> โดยชนะทีมตัวเต็งอย่าง Washington Bullets แบบกวาด 4-0 ในรอบชิงชนะเลิศ
+    </p>
+    <p>
+        ตลอดช่วงทศวรรษ 80s–90s ทีมพยายามสร้างตัวใหม่หลายครั้ง ผ่านผู้เล่นอย่าง Chris Mullin, Tim Hardaway และ Latrell Sprewell แต่ก็ไม่อาจกลับสู่เวทีแชมป์ได้สำเร็จ
+    </p>
+    <p>
+        จุดเปลี่ยนสำคัญในประวัติศาสตร์เกิดขึ้นในช่วง <strong>ปี 2009</strong> เมื่อทีมดราฟ <strong>Stephen Curry</strong> ตามมาด้วย <strong>Klay Thompson</strong> และ <strong>Draymond Green</strong> ทั้งหมดกลายเป็นแกนหลักของยุคใหม่
+    </p>
+    <p>
+        เมื่อ <strong>Steve Kerr</strong> เข้ารับตำแหน่งโค้ชในปี 2014 ทีมพัฒนาอย่างรวดเร็ว ด้วยรูปแบบการเล่นที่ทันสมัย จนคว้าแชมป์ NBA ปี 2015 และอีกหลายสมัยหลังจากนั้น
+    </p>
+    <p>
+        การเสริมทีมด้วย <strong>Kevin Durant</strong> ทำให้ Warriors กลายเป็น Superteam และคว้าแชมป์ในปี 2017 และ 2018 หลังจากนั้นแม้ต้องเผชิญกับอาการบาดเจ็บหลายครั้ง แต่ก็กลับมาได้อีกครั้งในปี 2022 คว้าแชมป์ NBA สมัยที่ 7
+    </p>
 </section>
 
 <section id="matches" class="section tab-content">
-    <img src="https://cdn.nba.com/manage/2022/06/GettyImages-1241494463-scaled.jpg" class="team-img" alt="แชมป์ NBA">
     <h1>ผลงานและแชมป์</h1>
     <ul>
         <li>แชมป์ NBA ทั้งหมด 7 สมัย: 1947, 1956, 1975, 2015, 2017, 2018, 2022</li>
-        <li>เข้าชิง NBA Finals 12 ครั้ง</li>
-        <li>ทำสถิติชนะมากที่สุดในฤดูกาลปกติ (73-9) ปี 2016</li>
-        <li>มีผู้เล่นติด All-Star หลายคน รวมถึง MVP 2 สมัย Stephen Curry</li>
+        <li>เข้าชิง NBA Finals รวม 12 ครั้ง</li>
+        <li>ทำสถิติชนะมากที่สุดในฤดูกาลปกติ: 73 ชนะ 9 แพ้ (ปี 2015–2016)</li>
+        <li>Stephen Curry คว้ารางวัล MVP 2 สมัย (2015, 2016)</li>
     </ul>
 </section>
 
 <section id="players" class="section tab-content">
-    <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png" class="team-img" alt="Stephen Curry">
-    <h1>ผู้เล่นปัจจุบัน (ฤดูกาล 2024–2025)</h1>
+    <h1>สมาชิกทีม</h1>
+    <h3>ผู้เล่นปัจจุบัน</h3>
     <ul>
-        <li><strong>Stephen Curry</strong> - พอยต์การ์ด / MVP 2 สมัย</li>
-        <li><strong>Klay Thompson</strong> - ชู้ตติ้งการ์ด / มือสามแต้มระดับตำนาน</li>
-        <li><strong>Draymond Green</strong> - ฟอร์เวิร์ด / แนวรับ & ผู้นำ</li>
-        <li><strong>Andrew Wiggins</strong> - สมอลฟอร์เวิร์ด / All-Star 2022</li>
-        <li><strong>Jonathan Kuminga</strong> - ฟอร์เวิร์ด / ดาวรุ่งพุ่งแรง</li>
-        <li><strong>Brandin Podziemski</strong> - การ์ด / รุกแม่นยำ</li>
+        <li>Stephen Curry – พอยต์การ์ด / ผู้นำทีม</li>
+        <li>Klay Thompson – ชู้ตติ้งการ์ด</li>
+        <li>Draymond Green – ฟอร์เวิร์ด / แนวรับตัวหลัก</li>
+    </ul>
+    <h3>ผู้เล่นในตำนาน</h3>
+    <ul>
+        <li>Wilt Chamberlain – 30.1 PPG</li>
+        <li>Rick Barry – 24.8 PPG</li>
+        <li>Stephen Curry – 24.7 PPG</li>
+        <li>Kevin Durant – 27.2 PPG</li>
+        <li>Klay Thompson – 19.8 PPG</li>
     </ul>
 </section>
 
@@ -132,6 +175,42 @@
         });
         document.getElementById(tabName).classList.add('active');
     }
+
+    window.addEventListener('load', () => {
+        const ctx = document.getElementById('playerStatsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Wilt Chamberlain', 'Rick Barry', 'Stephen Curry', 'Kevin Durant', 'Klay Thompson'],
+                datasets: [{
+                    label: 'คะแนนเฉลี่ยต่อเกม (PPG)',
+                    data: [30.1, 24.8, 24.7, 27.2, 19.8],
+                    backgroundColor: ['#FDB927', '#1D428A', '#FDB927', '#1D428A', '#FDB927'],
+                    borderColor: '#1D428A',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'เปรียบเทียบคะแนนเฉลี่ยต่อเกมของผู้เล่นในตำนาน (PPG)'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'คะแนนเฉลี่ย (PPG)'
+                        }
+                    }
+                }
+            }
+        });
+    });
 </script>
 
 </body>
